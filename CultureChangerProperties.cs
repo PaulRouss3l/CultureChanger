@@ -1,10 +1,5 @@
-﻿
-using TaleWorlds.SaveSystem;
+﻿using TaleWorlds.SaveSystem;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Library;
-using TaleWorlds.Core;
-using System.Collections.Generic;
-using CultureChanger.Screens.ViewModels;
 
 namespace CultureChanger.Classes
 {

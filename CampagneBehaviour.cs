@@ -16,15 +16,11 @@ namespace CultureChanger.Behaviours
 
         public override void RegisterEvents()
         {
-            // this.acrePropertiesMap = new Dictionary<string, AcreProperties>();
             CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnSessionLaunched));
-            // CampaignEvents.RaidCompletedEvent.AddNonSerializedListener(this, new Action<BattleSideEnum, MapEvent>(this.OnRaidCompleted));
         }
 
         public override void SyncData(IDataStore dataStore)
         {
-/*            dataStore.SyncData<Dictionary<string, AcreProperties>>("acrePropertiesMap", ref this.acrePropertiesMap);
-            throw new NotImplementedException();*/
         }
 
         private void OnSessionLaunched(CampaignGameStarter obj)
@@ -53,13 +49,6 @@ namespace CultureChanger.Behaviours
         {
             CultureChangerProperties properties = new CultureChangerProperties(Settlement.CurrentSettlement.StringId);
             ScreenManager.PushScreen(new CultureChangerScreen(ref properties));
-        }
-
-        public class MySaveDefiner : SaveableTypeDefiner
-        {
-            public MySaveDefiner() : base(52357712)
-            {
-            }
         }
     }
 }

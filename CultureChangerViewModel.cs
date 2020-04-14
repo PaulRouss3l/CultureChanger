@@ -51,7 +51,29 @@ namespace CultureChanger.Screens.ViewModels
 
 		private void ExitChangeCultureMenu()
 		{
+			// change culture to the choosen one
 			this._cultureChangerProperties.Settlement.Culture = this._cultureChangerProperties.CurrentCulture;
+			// change bound settlement as well
+			if (this._cultureChangerProperties.Settlement.BoundVillages.Count > 0)
+			{
+
+				foreach (Village element in this._cultureChangerProperties.Settlement.BoundVillages)
+				{
+					Settlement settlement = Settlement.FindAll(delegate(Settlement s) {
+						if (s.Name.ToString() == element.Name.ToString())
+						{
+							return true;
+						}
+						return false;
+					}).First();
+					if (settlement == null)
+					{
+						continue;
+					}
+					settlement.Culture = this._cultureChangerProperties.Settlement.Culture;
+				}
+			}
+			
 			InformationManager.DisplayMessage(new InformationMessage("Culture changed to " + this._cultureChangerProperties.CurrentCultureName));
 			ScreenManager.PopScreen();
 		}
