@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CultureChanger", "CultureChanger.csproj", "{D581E630-BC26-47A4-99CA-D8900DFDA0EA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8C5CE527-396C-4403-B2F8-29F34B38F79C}"
+	ProjectSection(SolutionItems) = preProject
+		GUI\Prefabs\CultureChangerScreen.xml = GUI\Prefabs\CultureChangerScreen.xml
+		SubModule.xml = SubModule.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

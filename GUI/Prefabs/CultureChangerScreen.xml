@@ -1,0 +1,112 @@
+<Prefab>
+  <Variables>
+  </Variables>
+  <VisualDefinitions>
+    <VisualDefinition Name="BottomMenu" DelayOnBegin="0.2" TransitionDuration="0.4">
+      <VisualState PositionYOffset="0" State="Default" />
+    </VisualDefinition>
+  </VisualDefinitions>
+  <Window>
+	  <!--Background-->
+    <Widget WidthSizePolicy = "StretchToParent" HeightSizePolicy = "StretchToParent" Brush="Frame1Brush">
+      <Children>
+		    <!--Main Panel-->
+        <Widget DoNotAcceptEvents="true" WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedHeight="900" SuggestedWidth="1200" MarginTop="50" HorizontalAlignment="Center" Brush="Recruitment.Frame">
+          <Children>
+
+            <!--Title-->
+            <RichTextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="1200" SuggestedHeight="55" HorizontalAlignment="Center" MarginTop="25" Brush="Stage.Title.Text" Text="@CurrentCulture" />
+
+            <Widget Id="InnerPanel" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="600" SuggestedHeight="750" HorizontalAlignment="Center" MarginTop="45" VerticalAlignment="Center">
+              <Children>
+
+                <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" MarginLeft="25" MarginRight="25" LayoutImp.LayoutMethod="VerticalBottomToTop">
+                  <Children>
+
+                    <GridWidget DataSource="{Cultures}" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" DefaultCellWidth="188" DefaultCellHeight="370" ColumnCount="3" HorizontalAlignment="Center">
+                      <ItemTemplate>
+
+                        <ButtonWidget DoNotPassEventsToChildren="true" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" VerticalAlignment="Center" Command.Click="ExecuteSelectCulture" IsSelected="@IsSelected" UpdateChildrenStates="true" Brush="CharacterCreation.Culture.Banner.SoundBrush">
+                          <Children>
+
+                            <!--Culture Flag-->
+                            <CharacterCreationCultureVisualWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="181" SuggestedHeight="333" CurrentCultureId="@CultureID" Brush="CharacterCreation.Culture.Banner" UpdateChildrenStates="true">
+                              <Children>
+                                <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="217" SuggestedHeight="315" PositionXOffset="0" HorizontalAlignment="Center" MarginLeft="0" PositionYOffset="-14" Sprite="CharacterCreation\culture_flag_small_selection" IsVisible="@IsSelected" />
+                              </Children>
+                            </CharacterCreationCultureVisualWidget>
+
+                            <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="181" SuggestedHeight="30" VerticalAlignment="Bottom" PositionYOffset="3" Brush="Culture.Text" Text="@ShortenedNameText" />
+
+
+                          </Children>
+                        </ButtonWidget>
+
+                      </ItemTemplate>
+                    </GridWidget>
+
+                    <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Bottom" MarginTop="20" Brush.FontSize="25" Text="@CurrentSelectedCultureText" />
+
+                  </Children>
+                </ListPanel>
+
+              </Children>
+            </Widget>
+          </Children>
+        </Widget>
+        <Standard.DialogCloseButtons VisualDefinition="BottomMenu" Parameter.DoneButtonAction="ExitChangeCultureMenu" PositionYOffset="100" Parameter.DoneButtonText="Done" Parameter.ShowCancel="false" />
+      </Children>
+		</Widget>
+
+
+    <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Brush.Color="#000000FF">
+      <Children>
+
+        <!--Title-->
+        <RichTextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="670" SuggestedHeight="55" HorizontalAlignment="Right" Brush="Stage.Title.Text" Text="Title" />
+
+        <!--Description-->
+        <RichTextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="620" SuggestedHeight="90" HorizontalAlignment="Right" MarginRight="15" MarginTop="100" Brush="Stage.Description.Text" Text="Description" />
+
+        <Widget Id="InnerPanel" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="573" SuggestedHeight="750" HorizontalAlignment="Center" VerticalAlignment="Center" PositionXOffset="23" PositionYOffset="37">
+          <Children>
+
+            <ListPanel WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" MarginLeft="25" MarginRight="25" LayoutImp.LayoutMethod="VerticalBottomToTop">
+              <Children>
+
+                <GridWidget DataSource="{Cultures}" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" DefaultCellWidth="188" DefaultCellHeight="370" ColumnCount="3" HorizontalAlignment="Center">
+                  <ItemTemplate>
+
+                    <ButtonWidget DoNotPassEventsToChildren="true" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" VerticalAlignment="Center" Command.Click="ExecuteSelectCulture" IsSelected="@IsSelected" UpdateChildrenStates="true" Brush="CharacterCreation.Culture.Banner.SoundBrush">
+                      <Children>
+
+                        <!--Culture Flag-->
+                        <CharacterCreationCultureVisualWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="181" SuggestedHeight="333" CurrentCultureId="@CultureID" Brush="CharacterCreation.Culture.Banner" UpdateChildrenStates="true">
+                          <Children>
+                            <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="217" SuggestedHeight="315" PositionXOffset="0" HorizontalAlignment="Center" MarginLeft="0" PositionYOffset="-14" Sprite="CharacterCreation\culture_flag_small_selection" IsVisible="@IsSelected" />
+                          </Children>
+                        </CharacterCreationCultureVisualWidget>
+
+                        <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="181" SuggestedHeight="30" VerticalAlignment="Bottom" PositionYOffset="3" Brush="Culture.Text" Text="@ShortenedNameText" />
+
+
+                      </Children>
+                    </ButtonWidget>
+
+                  </ItemTemplate>
+                </GridWidget>
+
+                <RichTextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="CoverChildren" VerticalAlignment="Bottom" MarginTop="20" Brush.FontSize="25" Text="@CurrentSelectedCultureText" />
+
+              </Children>
+            </ListPanel>
+
+          </Children>
+        </Widget>
+
+        <!--<Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" PositionXOffset="-290" Sprite="InventoryBackground" />-->
+        <Standard.DialogCloseButtons VisualDefinition="BottomMenu" Parameter.DoneButtonAction="ExitChangeCultureMenu" PositionYOffset="100" Parameter.DoneButtonText="Done" Parameter.ShowCancel="false" />
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>
