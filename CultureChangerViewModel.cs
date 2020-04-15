@@ -30,6 +30,24 @@ namespace CultureChanger.Screens.ViewModels
 			}
 		}
 
+		[DataSourceProperty]
+		public string CurrentSettlement
+		{
+			get
+			{
+				return this._cultureChangerProperties.Settlement.Name.ToString();
+			}
+		}
+
+		[DataSourceProperty]
+		public string CurrentCulture
+		{
+			get
+			{
+				return string.Format("The current culture of {0} is {1}", this._cultureChangerProperties.Settlement.Name.ToString(), this._cultureChangerProperties.Settlement.Culture.Name.ToString());
+			}
+		}
+
 		public MBBindingList<CultureItemVM> _cultureItems;
 
 		private CultureChangerProperties _cultureChangerProperties;
@@ -51,30 +69,40 @@ namespace CultureChanger.Screens.ViewModels
 
 		private void ExitChangeCultureMenu()
 		{
-			// change culture to the choosen one
-			this._cultureChangerProperties.Settlement.Culture = this._cultureChangerProperties.CurrentCulture;
-			// change bound settlement as well
-			if (this._cultureChangerProperties.Settlement.BoundVillages.Count > 0)
+			if (this._cultureChangerProperties.CurrentCulture != null)
 			{
-
-				foreach (Village element in this._cultureChangerProperties.Settlement.BoundVillages)
+				// change culture to the choosen one
+				this._cultureChangerProperties.Settlement.Culture = this._cultureChangerProperties.CurrentCulture;
+				// change bound settlement as well
+				if (this._cultureChangerProperties.Settlement.BoundVillages.Count > 0)
 				{
-					Settlement settlement = Settlement.FindAll(delegate(Settlement s) {
-						if (s.Name.ToString() == element.Name.ToString())
-						{
-							return true;
-						}
-						return false;
-					}).First();
-					if (settlement == null)
+					foreach (Village element in this._cultureChangerProperties.Settlement.BoundVillages)
 					{
-						continue;
+						Settlement settlement = Settlement.FindAll(delegate (Settlement s) {
+							if (s.Name.ToString() == element.Name.ToString())
+							{
+								return true;
+							}
+							return false;
+						}).First();
+						if (settlement == null)
+						{
+							InformationManager.DisplayMessage(new InformationMessage("[Error] Could not find bound settlement :" + element.Name.ToString()));
+							continue;
+						}
+						else
+						{
+							InformationManager.DisplayMessage(new InformationMessage(
+								String.Format("Culture of {0} changed to {1}", element.Name.ToString(), this._cultureChangerProperties.CurrentCultureName)
+							));
+						}
+						settlement.Culture = this._cultureChangerProperties.Settlement.Culture;
 					}
-					settlement.Culture = this._cultureChangerProperties.Settlement.Culture;
 				}
+				InformationManager.DisplayMessage(new InformationMessage(
+					String.Format("Culture of {0} changed to {1}", this._cultureChangerProperties.Settlement.Name.ToString(), this._cultureChangerProperties.CurrentCultureName)
+				));
 			}
-			
-			InformationManager.DisplayMessage(new InformationMessage("Culture changed to " + this._cultureChangerProperties.CurrentCultureName));
 			ScreenManager.PopScreen();
 		}
 	}

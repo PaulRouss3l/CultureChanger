@@ -30,10 +30,14 @@ namespace CultureChanger.Behaviours
 
         private void createCultureChangerSettlementMenus(CampaignGameStarter obj)
         {
-            obj.AddGameMenuOption("town", "town_culture_change", "Change Town Culture",
+            obj.AddGameMenuOption("town", "town_culture_change", "Change town culture",
                 new GameMenuOption.OnConditionDelegate(CultureChangerCampaignBehaviour.game_menu_town_change_culture_on_condition),
-                new GameMenuOption.OnConsequenceDelegate(CultureChangerCampaignBehaviour.game_menu_town_change_culture_on_consequence),
-                false, -1, false);
+                new GameMenuOption.OnConsequenceDelegate(CultureChangerCampaignBehaviour.game_menu_change_culture_on_consequence),
+                false, 5, false);
+            obj.AddGameMenuOption("castle", "castle_culture_change", "Change castle culture",
+                new GameMenuOption.OnConditionDelegate(CultureChangerCampaignBehaviour.game_menu_castle_change_culture_on_condition),
+                new GameMenuOption.OnConsequenceDelegate(CultureChangerCampaignBehaviour.game_menu_change_culture_on_consequence),
+                false, 7, false);
         }
 
         public static bool game_menu_town_change_culture_on_condition(MenuCallbackArgs args)
@@ -45,7 +49,13 @@ namespace CultureChanger.Behaviours
             return MenuHelper.SetOptionProperties(args, Campaign.Current.Models.SettlementAccessModel.CanMainHeroDoSettlementAction(currentSettlement, SettlementAccessModel.SettlementAction.ManageTown, out disableOption, out disabledText), disableOption, disabledText);
         }
 
-        public static void game_menu_town_change_culture_on_consequence(MenuCallbackArgs args)
+        private static bool game_menu_castle_change_culture_on_condition(MenuCallbackArgs args)
+        {
+            args.optionLeaveType = GameMenuOption.LeaveType.Manage;
+            return Settlement.CurrentSettlement.OwnerClan == Clan.PlayerClan && Settlement.CurrentSettlement.IsCastle;
+        }
+
+        public static void game_menu_change_culture_on_consequence(MenuCallbackArgs args)
         {
             CultureChangerProperties properties = new CultureChangerProperties(Settlement.CurrentSettlement.StringId);
             ScreenManager.PushScreen(new CultureChangerScreen(ref properties));
